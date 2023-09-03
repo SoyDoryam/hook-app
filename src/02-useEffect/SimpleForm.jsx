@@ -22,12 +22,22 @@ export const SimpleForm = () => {
         });
     };
 
-    // 4. Efecto que se ejecuta después de cada renderizado.
+    // 4. Primer useEffect: se ejecuta solo una vez al montar el componente.
     useEffect(() => {
-        console.log('useEffect called!'); // Registro en la consola.
-    });
+        console.log('useEffect called! (No dependencias)'); // Registro en la consola.
+    }, []);
 
-    // 5. Renderizado del formulario.
+    // 5. Segundo useEffect: se ejecuta cuando el estado del formulario (formState) cambia.
+    useEffect(() => {
+        console.log('FormState change! (Dependencia: formState)');
+    }, [formState]);
+
+    // 6. Tercer useEffect: se ejecuta cuando el valor del correo electrónico (email) cambia.
+    useEffect(() => {
+        console.log('Email change! (Dependencia: email)');
+    }, [email]);
+
+    // 7. Renderizado del formulario.
     return (
         <>
             <h1>Simple Form</h1>
