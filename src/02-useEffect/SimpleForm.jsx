@@ -1,67 +1,62 @@
 import { useEffect, useState } from "react"
+import { Message } from "./Message";
 
 export const SimpleForm = () => {
-    // 1. Inicializar el estado del formulario con valores predefinidos.
+
     const [formState, setFormState] = useState({
         username: 'strider',
         email: 'dorian@google.com',
     });
 
-    // 2. Desestructurar el estado del formulario para su uso.
-    const { username, email } = formState;
+    const {username, email} = formState;
 
-    // 3. Función para manejar cambios en los campos de entrada.
-    const onInputChange = ({ target }) => {
-        // Extraer el nombre y el valor del campo que cambió.
-        const { name, value } = target;
-        
-        // Actualizar el estado del formulario con el nuevo valor.
+    const onInputChange = ({target}) => {
+        const {name, value} = target;
         setFormState({
             ...formState,
-            [name]: value
+            [ name ]: value
         });
     };
 
-    // 4. Primer useEffect: se ejecuta solo una vez al montar el componente.
     useEffect(() => {
-        console.log('useEffect called! (No dependencias)'); // Registro en la consola.
+        // console.log('useEffect called! (No dependencias)');
     }, []);
 
-    // 5. Segundo useEffect: se ejecuta cuando el estado del formulario (formState) cambia.
     useEffect(() => {
-        console.log('FormState change! (Dependencia: formState)');
-    }, [formState]);
+        // console.log('FormStage change! (Dependencia: formState)');
+    }, [ formState ]);
 
-    // 6. Tercer useEffect: se ejecuta cuando el valor del correo electrónico (email) cambia.
     useEffect(() => {
-        console.log('Email change! (Dependencia: email)');
-    }, [email]);
-
-    // 7. Renderizado del formulario.
+        // console.log('email change! (Dependencia: email)');
+    }, [ email ]);
+    
     return (
         <>
             <h1>Simple Form</h1>
             <hr />
 
-            {/* Campo de entrada para el nombre de usuario */}
-            <input
+            <input 
                 type="text"
                 className="form-control"
                 placeholder="Username"
                 name="username"
-                value={username} // Valor del estado actual
-                onChange={onInputChange} // Manejador de cambios
+                value={username}
+                onChange={ onInputChange } 
             />
 
-            {/* Campo de entrada para el correo electrónico */}
-            <input
+            <input 
                 type="email"
                 className="form-control mt-2"
                 placeholder="rizo@google.com"
-                name="email"
-                value={email} // Valor del estado actual
-                onChange={onInputChange} // Manejador de cambios
+                name="email" 
+                value={email}
+                onChange={ onInputChange }
             />
+
+            {
+                username === 'strider2' && <Message />
+            }
+
         </>
     )
 }
