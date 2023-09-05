@@ -1,21 +1,31 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react";
 
 export const Message = () => {
-    
-    // useEffect se utiliza para realizar acciones cuando el componente se monta y desmonta.
+    // 1. Inicialización del estado local 'coords' con un objeto que tiene las propiedades 'x' e 'y', ambas inicializadas en 0.
+    const [coords, setCoords] = useState({ x: 0, y: 0 });
+
     useEffect(() => {
-        console.log('Message Mounted'); // Se muestra cuando el componente se monta.
+        // 2. Definición de la función de callback 'onMouseMove' que se ejecutará en cada evento 'mousemove'.
+        const onMouseMove = ({ clientX: x, clientY: y }) => {
+            // 3. Actualización del estado 'coords' con las coordenadas 'x' e 'y' del evento.
+            setCoords({ x, y });
+        };
 
-        // La función de retorno se ejecutará cuando el componente se desmonte.
+        // 4. Agregado de un event listener para el evento 'mousemove' de la ventana que llama a 'onMouseMove' cuando se dispara el evento.
+        window.addEventListener('mousemove', onMouseMove);
+
+        // 5. Función de retorno para limpiar y eliminar el event listener cuando el componente se desmonta.
         return () => {
-            console.log('Message Unmounted'); // Se muestra cuando el componente se desmonta.
-        }
-    }, []); // El arreglo de dependencias está vacío, lo que significa que este efecto solo se ejecuta una vez al montar el componente.
+            window.removeEventListener('mousemove', onMouseMove);
+        };
+    }, []); // El arreglo de dependencias vacío indica que este efecto se ejecutará una vez después de la renderización inicial.
 
-    // El componente renderiza un simple encabezado <h3>.
+    // 6. Retorno del componente, que muestra un encabezado <h3> y las coordenadas 'coords' en formato JSON.
     return (
         <>
-        <h3>Usuario ya existe</h3>
+            <h3>Usuario ya existe</h3>
+            {JSON.stringify(coords)}
         </>
-    )
-}
+    );
+};
+
