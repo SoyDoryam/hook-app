@@ -1,20 +1,33 @@
-// Importación del Custom Hook useFetch desde la ubicación especificada
 import { useFetch } from "../hooks/useFetch"
 
-// Componente funcional MultipleCustomHooks
 export const MultipleCustomHooks = () => {
 
-    // Utilización del Custom Hook useFetch para obtener datos
     const { data, isLoading, hasError } = useFetch('https://api.breakingbadquotes.xyz/v1/quotes/1');
 
-    // Impresión en la consola de los datos y estados obtenidos
-    console.log({ data, isLoading, hasError })
+    const {author, quote} = !!data && data[0];
 
-    // Componente retorna una estructura JSX
     return (
         <>
             <h1>BreakingBad Quotes</h1>
             <hr />
+
+            {
+                isLoading ? (
+                    <div className="alert alert-info text-center">
+                        Loading...
+                    </div>
+                ):(
+                    <blockquote className="blockquote text-end">
+                        <p className="mb-1">{ quote }</p>
+                        <footer className="blockquote-footer">{ author }</footer>
+                    </blockquote>
+                )
+            }
+
+
+            <button className="btn btn-primary">
+                Next quote
+            </button>
         </>
     )
 }
