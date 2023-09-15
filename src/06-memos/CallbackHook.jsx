@@ -7,10 +7,10 @@ export const CallbackHook = () => {
 
     // Utilizamos useCallback para memorizar la función incrementFather.
     const incrementFather = useCallback(
-        () => {
+        (value) => {
             // Incrementamos el valor del contador en 1 utilizando la función de actualización
             // para asegurarnos de que estamos obteniendo el valor más reciente.
-            setCounter((value) => value + 1);
+            setCounter((c) => c + value);
         },
         [] // La dependencia está vacía, lo que significa que esta función se memoriza una vez y no cambia.
     );
