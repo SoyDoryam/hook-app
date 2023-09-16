@@ -1,25 +1,33 @@
-import { useReducer } from "react";
+import { useEffect, useReducer } from "react";
 import { todoReducer } from "./todoReducer";
 import { TodoList } from "./TodoList";
 import { TodoAdd } from "./TodoAdd";
 
 // Estado inicial de la lista de tareas.
 const initialState = [
-    {
-        id: new Date().getTime(),
-        description: 'Recolectar la piedra del alma',
-        done: false
-    },
-    {
-        id: new Date().getTime() * 3,
-        description: 'Recolectar la piedra del infinito',
-        done: false
-    },
+    // {
+    //     id: new Date().getTime(),
+    //     description: 'Recolectar la piedra del alma',
+    //     done: false
+    // },
 ];
+
+// Función de inicialización para obtener las tareas desde el "LocalStorage".
+
+const init = () => {
+    return JSON.parse( localStorage.getItem('todos') || []);// Si no hay datos, retorna un arreglo vacío.
+}
 
 export const TodoApp = () => {
     // Utiliza el hook useReducer para gestionar el estado de la lista de tareas.
-    const [todos, dispatch] = useReducer(todoReducer, initialState);
+    // Se pasa la función init como tercer argumento para inicializar el estado desde el "LocalStorage"
+    const [todos, dispatch] = useReducer(todoReducer, initialState, init);
+
+    // Efecto secundario para guardar los cambios en el "LocalStorage" cuando los datos de las tareas cambian.
+    useEffect(() => {
+      localStorage.setItem('todos', JSON.stringify(todos) );
+    }, [todos])
+    
 
     // Función para manejar la adición de una nueva tarea.
     const handleNewTodo = (todo) => {
