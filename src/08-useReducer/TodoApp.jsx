@@ -18,16 +18,19 @@ const initialState = [
 ];
 
 export const TodoApp = () => {
-
-    // Usamos el hook useReducer para gestionar el estado de la lista de tareas.
-    // Pasamos el reducer (todoReducer) y el estado inicial (initialState) como argumentos.
+    // Utiliza el hook useReducer para gestionar el estado de la lista de tareas.
     const [todos, dispatch] = useReducer(todoReducer, initialState);
 
-    // Función para manejar la creación de nuevas tareas.
+    // Función para manejar la adición de una nueva tarea.
     const handleNewTodo = (todo) => {
-        // Esta función podría ser usada para agregar nuevas tareas al estado.
-        // Por ahora, simplemente muestra la nueva tarea en la consola.
-        console.log(todo)
+        // Crea una acción con un tipo que representa la adición de una tarea y el payload con la tarea a agregar.
+        const action = {
+            type: '[TODO] Add Todo',
+            payload: todo,
+        }
+
+        // Llama a la función `dispatch` para enviar la acción al reducer.
+        dispatch(action);
     }
 
     return (
@@ -37,6 +40,7 @@ export const TodoApp = () => {
 
             <div className="row">
                 <div className="col-7">
+                    {/* Renderiza el componente TodoList y pasa la lista de tareas como prop. */}
                     <TodoList todos={todos} />
                 </div>
 

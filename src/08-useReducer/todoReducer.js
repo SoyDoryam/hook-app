@@ -1,14 +1,13 @@
 // Definición del reducer. Recibe el estado inicial y una acción como argumentos.
 export const todoReducer = (initialState = [], action) => {
-    
     // Utiliza un switch para manejar diferentes tipos de acciones.
     switch (action.type) {
-        case 'ABC':
-            // Cuando se recibe una acción de tipo 'ABC', lanzamos un error indicando que esta acción no está implementada.
-            throw new Error('Action.type = ABC no está implementada');
-    
+        case '[TODO] Add Todo':
+            // Cuando el tipo de acción es '[TODO] Add Todo', agrega la tarea al estado actual.
+            // Utiliza el operador spread para crear un nuevo arreglo que incluye todas las tareas actuales y la nueva tarea del payload.
+            return [...initialState, action.payload];
         default:
-            // En caso de cualquier otra acción, simplemente se devuelve el estado inicial sin cambios.
+            // Si el tipo de acción no coincide con ninguno de los casos anteriores, devuelve el estado actual sin cambios.
             return initialState;
     }
 }
