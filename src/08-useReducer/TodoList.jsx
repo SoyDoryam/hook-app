@@ -1,13 +1,16 @@
 import { TodoItem } from "./TodoItem"; // Importa el componente TodoItem
 
-export const TodoList = ({ todos = [] }) => {
+export const TodoList = ({ todos = [], onDeleteTodo }) => {
   return (
     <ul className="list-group">
-      {
-        todos.map(todo => (
-          <TodoItem key={todo.id} todo={todo} /> // Renderiza un TodoItem para cada tarea en la lista
-        ))
-      }
+      {/* Mapea cada tarea en la lista de tareas y renderiza un TodoItem para cada una. */}
+      {todos.map((todo) => (
+        <TodoItem
+          key={todo.id} // Establece una clave única para cada elemento en la lista.
+          todo={todo} // Pasa la tarea actual como prop al componente TodoItem.
+          onDeleteTodo={(id) => onDeleteTodo(id)} // Pasa la función onDeleteTodo y el ID de la tarea para manejar la eliminación.
+        />
+      ))}
     </ul>
   );
 };
