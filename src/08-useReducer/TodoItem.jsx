@@ -1,13 +1,18 @@
-export const TodoItem = ({ todo, onDeleteTodo }) => {
+export const TodoItem = ({ todo, onDeleteTodo, onToggleTodo }) => {
   return (
-    // Representa un elemento de lista <li> que muestra una tarea individual.
     <li key={todo.id} className="list-group-item d-flex justify-content-between">
-      {/* Muestra la descripción de la tarea dentro de un elemento <span>. */}
-      <span className="align-self-center">{todo.description}</span>
-      {/* Crea un botón con estilo de Bootstrap para eliminar la tarea. */}
+      <span 
+        // Aquí se utiliza una plantilla de cadena de texto para definir la clase del elemento <span>.
+        // La clase "align-self-center" se aplica siempre, y la clase "text-decoration-line-through" se aplica si la tarea está marcada como completada (done es true).
+        className={`align-self-center ${todo.done && 'text-decoration-line-through'}`}
+        // Se agrega un evento onClick al <span> para manejar el clic en la tarea y llamar a la función onToggleTodo con el ID de la tarea.
+        onClick={() => onToggleTodo( todo.id )}
+      >
+        {todo.description}
+      </span>
       <button 
         className="btn btn-danger"
-        // Cuando se hace clic en el botón, se llama a la función onDeleteTodo con el ID de la tarea como argumento.
+        // Se agrega un evento onClick al botón para manejar la eliminación de la tarea y llamar a la función onDeleteTodo con el ID de la tarea.
         onClick={() => onDeleteTodo( todo.id ) }
       >Borrar</button>
     </li>

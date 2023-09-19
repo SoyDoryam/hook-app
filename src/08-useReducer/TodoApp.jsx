@@ -31,7 +31,7 @@ export const TodoApp = () => {
   const handleNewTodo = (todo) => {
     // Crea una acción con un tipo que representa la adición de una tarea y el payload con la tarea a agregar.
     const action = {
-      type: "[TODO] Add Todo",
+      type: '[TODO] Add Todo',
       payload: todo,
     };
 
@@ -42,13 +42,24 @@ export const TodoApp = () => {
   const handledDeleteTodo = (id) => {
     // Crea una acción con un tipo que representa la eliminación de una tarea y el payload con el ID de la tarea a eliminar.
     const action = {
-      type: "[TODO] Remove Todo",
+      type: '[TODO] Remove Todo',
       payload: id,
     };
 
     // Llama a la función `dispatch` para enviar la acción al reducer.
     dispatch(action);
   };
+
+  const handleToggleTodo = (id) => {
+    // Crea una acción con un tipo que representa el cambio de estado de una tarea y el payload con el ID de la tarea a modificar.
+    const action = {
+      type: '[TODO] Toggle Todo',
+      payload: id,
+    }
+
+    // Llama a la función `dispatch` para enviar la acción al reducer.
+    dispatch(action)
+  }
 
   return (
     <>
@@ -59,8 +70,8 @@ export const TodoApp = () => {
 
       <div className="row">
         <div className="col-7">
-          {/* Renderiza el componente TodoList y pasa la lista de tareas como prop, junto con la función para eliminar tareas. */}
-          <TodoList todos={todos} onDeleteTodo={handledDeleteTodo} />
+          {/* Renderiza el componente TodoList y pasa la lista de tareas como prop, junto con la función para eliminar tareas y la función para cambiar el estado de las tareas. */}
+          <TodoList todos={todos} onDeleteTodo={handledDeleteTodo} onToggleTodo={handleToggleTodo} />
         </div>
 
         <div className="col-5">
