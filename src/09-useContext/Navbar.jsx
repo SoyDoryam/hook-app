@@ -1,6 +1,6 @@
 import { Link, NavLink } from "react-router-dom"
 
-export const NavBar = () => {
+export const Navbar = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark rounded-3">
       <div className="container-fluid">
