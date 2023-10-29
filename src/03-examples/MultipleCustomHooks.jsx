@@ -28,7 +28,7 @@ export const MultipleCustomHooks = () => {
                 className="btn btn-primary"
                 disabled={ isLoading } // Deshabilita el botón durante la carga
                 onClick={() => increment()} // Incrementa el contador al hacer clic
-            >Next quote { counter }</button>
+            >Next quote</button>
         </>
     )
 }

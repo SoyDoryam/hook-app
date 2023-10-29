@@ -64,7 +64,7 @@ describe('Pruebas en el useCounter', () => {
 
         // Verifica que el contador se haya decrementado a 97
         expect(result.current.counter).toBe(97);
-    })
+    })  
 
     // Prueba para verificar si el contador se resetea correctamente
     test('debe de resetear el contador', () => {
