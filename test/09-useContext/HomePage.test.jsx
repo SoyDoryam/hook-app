@@ -23,7 +23,7 @@ describe('Pruebas en <HomePage />', () => {
         const preTag = screen.getByLabelText('pre');
 
         // Verifica que el contenido del elemento 'pre' sea exactamente igual a 'null'
-        expect(preTag.innerHTML).toBeNull();
+        expect(preTag.innerHTML).toBe('null');
     });
 
     // Segunda prueba: debe de mostrar el componente con el usuario
